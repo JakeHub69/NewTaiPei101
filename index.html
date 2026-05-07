@@ -1,22 +1,17 @@
+<script>
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJaafp1QpmzCuSRNKjtRcBryjcBynMgot7LhGszhXMGJXyzV6NK-m5NDpii_S-o_5tXg/exec";
 
 async function sendToSheet(e, formType, target) {
   e.preventDefault();
 
   const form = e.target;
-
-  const data = Object.fromEntries(
-    new FormData(form).entries()
-  );
-
+  const data = Object.fromEntries(new FormData(form).entries());
   data.formType = formType;
 
   const resultBox = document.getElementById(target);
-
   resultBox.textContent = "正在送出資料，請稍等...";
 
   try {
-
     const formData = new FormData();
 
     for (const key in data) {
@@ -29,16 +24,12 @@ async function sendToSheet(e, formType, target) {
       body: formData
     });
 
-    resultBox.textContent =
-      "✅ 已送出！請到 Google Sheets 檢查是否新增資料。";
-
+    resultBox.textContent = "✅ 已送出！請到 Google Sheets 檢查是否新增資料。";
     form.reset();
 
   } catch (err) {
-
-    resultBox.textContent =
-      "❌ 送出失敗，請檢查 Apps Script 權限與部署。";
-
+    resultBox.textContent = "❌ 送出失敗，請檢查 Apps Script 權限與部署。";
     console.error(err);
   }
 }
+</script>
